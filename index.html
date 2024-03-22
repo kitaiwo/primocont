@@ -1,46 +1,58 @@
-
 <!DOCTYPE html>
-<!-- Nome: Alicia Taiwo da Silva Montesano N° 02 ->
+<!-- Nome: Alicia Taiwo da Silva Montesano N° 02 Turma: 3ºA ->
 <!-- Nome:Diego Souza Horvate   N° 06 -->
 <!-- Nome:Kauã Andreotti Gabriel   N° 20  -->
 <!-- Nome:Tales costa caetano silva   N° 32 -->
 <!-- Nome:Valentin Martins do Amaral   N° 33 -->
-<html lang="Pt-BR">
-    <head>
-        <title>Teste</title>
-        <meta charset="UTF-8">
-        </head>
-        <body>
-       <script>
+<html lang="pt-BR">
+<head>
+    <title>Números Primos</title>        
+    <meta charset="UTF-8">          
+</head>
+<body>
+    <div>
+        <h1>Números Primos</h1>
+        <label>Digite a quantidade de números primos desejada:</label>
+        <input type="number" id="quantidadeInput">
+        <button onclick="exibirNumerosPrimos()">Exibir Números Primos</button>
+        <canvas id="meuCanvas" width="400" height="400" style="border:1px solid #000000; background-color: white;"></canvas>
+    </div>
 
-// Função principal do programa
-function main() {
-    // Recebendo os números do usuário
-    let numero1 = parseFloat(prompt("Digite o primeiro número:"));
-    let numero2 = parseFloat(prompt("Digite o segundo número:"));
-    let numero3 = parseFloat(prompt("Digite o terceiro número:"));
+    <script>
+        function isPrimo(num) {
+            if (num < 2) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
 
-    // Ordenando os números em ordem decrescente
-    let numeros = [numero1, numero2, numero3];
-    numeros.sort(function(a, b) {
-        return b - a;
-    });
+        function exibirNumerosPrimos() {
+            const quantidade = parseInt(document.getElementById("quantidadeInput").value);
+            const primos = [];
+            let num = 2;
+            while (primos.length < quantidade) {
+                if (isPrimo(num)) {
+                    primos.push(num);
+                }
+                num++;
+            }
 
-    // Mostrando os números em ordem decrescente
-    console.log("Números em ordem decrescente:");
-    for (let numero of numeros) {
-        console.log(numero);
-    }
-}
+            const canvas = document.getElementById('meuCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-// Chamando a função principal para executar o programa
-main();
+            ctx.font = '20px Arial';
+            ctx.fillStyle = 'black';
 
+            let y = 30;
+            for (let i = 0; i < primos.length; i++) {
+                ctx.fillText(primos[i], 50, y);
+                y += 30;
+            }
+        }
     </script>
-    <h1>Teste</h1>
-    <label for="numberInput">Digite um número:</label>
-    <input type="text" id="numberInput">
-    <button onclick="verificador()">Verificar</button>
-    <canvas id="meuCanvas" width="200" height="200" style="border:1px solid #000;"></canvas>
 </body>
 </html>
